@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../Styles/style.css">
+  <script src="../Script/index.js"></script>
+  <title>Verbos Irregulares</title>
+</head>
+
+<body>
+  <table>
+    <td>
+      <button class="button" onclick="iniciarJuego()">Iniciar Juego</button>
+    </td>
+    <td>
+      <button onclick="resetear()">Resetear Juego</button>
+    </td>
+  </table>
+  <input type="text" id="nombre-jugador-1" placeholder="Jugador 1" class="input">
+  <input type="text" id="nombre-jugador-2" placeholder="Jugador 2" class="input">
+  <input type="text" id="nombre-jugador-3" placeholder="Jugador 3" class="input">
+  <div id="puntajes">
+    <!-- Aquí se mostrarán los puntajes de los jugadores -->
+  </div>
+  <h1>Juego concentrese</h1>
+  <div class="card-grid">
+    <div class="card" data-verb="be" data-value="1">
+      <div class="card-flipper">
+        <div class="card-front">?</div>
+        <div class="card-back">be</div>
+      </div>
+    </div>
+    <div class="card" data-verb="was/were" data-value="1">
+      <div class="card-flipper">
+        <div class="card-front">?</div>
+        <div class="card-back">was/were</div>d
+
+      </div>
+    </div>
+    <div class="card" data-verb="been" data-value="1">
+      <div class="card-flipper">
+        <div class="card-front">?</div>
+        <div class="card-back">been</div>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+shuffleCards();
+flipSameValueCards();
+iniciarJuego();
+</script>
+</html>
