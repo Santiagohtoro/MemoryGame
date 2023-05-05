@@ -1,0 +1,3 @@
+HEX: #1295a3 --Azul
+HEX: #F2A649 --Naranja
+HEX: #F28705 --Naranja Oscuro
