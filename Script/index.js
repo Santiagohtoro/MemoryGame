@@ -64,7 +64,7 @@ window.addEventListener("load", function () {
 
     cards.forEach((card) => card.addEventListener("click", flipCard));
 
-    function flipCard() {
+    function flipCard(e) {
       if (flippedCards.length < 3) {
         this.classList.add("flipped");
         flippedCards.push(this);
@@ -73,7 +73,8 @@ window.addEventListener("load", function () {
       if (flippedCards.length === 3) {
         const isSameValue =
           flippedCards[0].dataset.value === flippedCards[1].dataset.value &&
-          flippedCards[1].dataset.value === flippedCards[2].dataset.value;
+          flippedCards[1].dataset.value === flippedCards[2].dataset.value && flippedCards[0].dataset.verb !== flippedCards[1].dataset.verb;
+          console.log()
 
         if (isSameValue) {
           flippedCards.forEach((card) =>
@@ -98,7 +99,7 @@ window.addEventListener("load", function () {
       if (flippedCards.length === 3) {
         const isSameValue =
           flippedCards[0].dataset.value === flippedCards[1].dataset.value &&
-          flippedCards[1].dataset.value === flippedCards[2].dataset.value;
+          flippedCards[1].dataset.value === flippedCards[2].dataset.value && flippedCards[0].dataset.verb !== flippedCards[1].dataset.verb;
 
         if (isSameValue) {
           flippedCards.forEach((card) =>
@@ -131,7 +132,7 @@ window.addEventListener("load", function () {
       // Mezclar y asignar valores de las cartas
       // ...
     }
-
+/*
     cardValues.forEach((value) => {
       const valueCards = document.querySelectorAll(
         `.card[data-value="${value}"]`
@@ -142,7 +143,7 @@ window.addEventListener("load", function () {
           card.removeEventListener("click", flipCard);
         });
       }
-    });
+    });*/
   });
   let jugadores = [
     { nombre: "", puntaje: 0 },

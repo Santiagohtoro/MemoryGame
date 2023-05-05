@@ -49,12 +49,12 @@
 }
 
 .card-front {
-    background-color: #fdca40;
+    background-color: #F2A649;
     color: white;
 }
 
 .card-back {
-    background-color: #ff6b6b;
+    background-color: #1295a3;
     color: white;
     transform: rotateY(180deg);
 }
@@ -74,7 +74,7 @@ button {
     padding: 10px;
     border: none;
     border-radius: 5px;
-    background-color: #4caf50;
+    background-color: #1295a3;
     color: #fff;
     font-size: 16px;
     cursor: pointer;
