@@ -24,45 +24,47 @@
                         <div class="containerRow">
                             <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                                 <p class="containerText">Registro</p>
-                                <form class="mx-1 mx-md-4" action="#">
+                                <form class="mx-1 mx-md-4" action="#" id="registerForm" name="registerForm">
                                     <div class="containerDiv">
                                         <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input type="text" id="form3Example1c" class="form-control" />
+                                            <input type="text" id="nameInput" class="form-control"
+                                                autofocus="autofocus" />
                                             <label class="form-label" for="form3Example1c">Tu nombre</label>
                                         </div>
                                     </div>
                                     <div class="containerDiv">
                                         <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input type="email" id="form3Example3c" class="form-control" />
+                                            <input type="text" id="emailInput" class="form-control" />
                                             <label class="form-label" for="form3Example3c">Tu correo</label>
                                         </div>
                                     </div>
                                     <div class="containerDiv">
                                         <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input type="password" id="form3Example4c" class="form-control" />
+                                            <input type="password" id="passwordInput" class="form-control" />
                                             <label class="form-label" for="form3Example4c">Contraseña</label>
                                         </div>
                                     </div>
                                     <div class="containerDiv">
                                         <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input type="password" id="form3Example4cd" class="form-control" />
+                                            <input type="password" id="reviewPassword" class="form-control" />
                                             <label class="form-label" for="form3Example4cd">Repite tu contraseña</label>
                                         </div>
                                     </div>
                                     <div class="containerConditions">
-                                        <input class="form-check-input me-2" type="checkbox" value=""
-                                            id="form2Example3c" />
-                                        <label class="form-check-label" for="form2Example3">
+                                        <input class="form-check-input me-2" type="checkbox"
+                                            id="selectTermsConditions" onclick="verificarCheck()"/>
+                                        <label class="TermConditions" for="form2Example3">
                                             Acepto los <a href="../static/Documents/TerminosCondiciones.pdf"
                                                 target="_blank">Terminos y Condiciones</a>
                                         </label>
                                     </div>
                                     <div class="containerButton">
-                                        <button type="submit" class="btn btn-primary btn-lg">Register</button>
+                                        <button type="submit" class="btnSend"
+                                            id="btnSend">Register</button>
                                     </div>
                                 </form>
                             </div>
