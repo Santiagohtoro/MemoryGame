@@ -1,4 +1,4 @@
-
+window.addEventListener("load", function () {
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('registerForm').addEventListener('submit', validarFormulario);
 });
@@ -92,3 +92,4 @@ function verificarCheck() {
         }
     });
 }
+});
