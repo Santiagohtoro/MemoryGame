@@ -72,7 +72,7 @@ function validarFormulario(evento) {
         return 0;
     }
 
-    if(reviewPassword != password){
+    if (reviewPassword != password) {
         alert("Las contraseñas no son iguales");
     }
 }
@@ -91,5 +91,10 @@ function verificarCheck() {
             btnSend.style.opacity = 0.5;
         }
     });
+}
+
+function goLogIn() {
+    location.href = '#';
+    console.log('Enviado');
 }
 });
