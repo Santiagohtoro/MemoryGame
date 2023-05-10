@@ -103,8 +103,15 @@
     background-color: #0e7985;
 }
 
-.spaceButton{
-    padding: 15px;
+.link{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.link label{
+    padding: 5px;
 }
 
 @media (min-width: 1200px) {
