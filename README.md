@@ -18,5 +18,5 @@ git pull
 Con ello traen lo que esta almacenado, vuelven a tu rama usando "Checkout". Cuando ya esten en su rama colocan
 
 ```bash
-git merge origin/"Rama a la que quieren combinar"
+git merge "Rama a la que quieren combinar"
 ```
