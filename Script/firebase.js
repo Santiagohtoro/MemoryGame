@@ -22,7 +22,7 @@
   firebase.initializeApp(firebaseConfig);
 
   const auth = firebase.auth();
-  const database = firebase.firestore(); // Para Firestore, o firebase.database() para Realtime Database
+  const database = firebase.database(); // Para Firestore, o firebase.database() para Realtime Database
   
   function registrarse() {
       const nombre = document.querySelector("#nameInput");
@@ -32,7 +32,7 @@
       auth.createUserWithEmailAndPassword(correo.value, password.value)
       .then(function () {
           let user = auth.currentUser;
-          let database_ref =  database.collection("users").doc(user.uid);
+          //let database_ref =  database.ref();
         
           var user_data = {
               email: correo.value,
@@ -41,7 +41,7 @@
               last_login: Date.now()
           };
           alert(user_data)
-          database_ref.set(user_data);
+          database.ref('users/'+ user.uid).set(user_data);
           window.alert("LISTOOO")
       });
      

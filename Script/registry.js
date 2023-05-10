@@ -93,8 +93,5 @@ function verificarCheck() {
     });
 }
 
-function goLogIn() {
-    location.href = '#';
-    console.log('Enviado');
-}
+
 });
