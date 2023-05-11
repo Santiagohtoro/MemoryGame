@@ -22,41 +22,31 @@ firebase.initializeApp(firebaseConfig);
 
 const auth = firebase.auth();
 const database = firebase.database(); // Para Firestore, o firebase.database() para Realtime Database
-  
-function login() {
-  const correo = document.getElementById( 'emailInput').value;
-  const password = document.getElementById('passwordInput').value;
-  console.log(correo);
-  console.log(password);
-  console.log("estoy entrando");
-  auth.signInWithEmailAndPassword(correo, password)
-  .then((userCredential) => {
-    // Signed up 
-    const user = userCredential.user;
-    // ...
-    console.log(user);
-  })
-  .catch((err) => {
-    console.log(err.code);
-    console.log(err.message);
-  });
-}
 
-/*.then(function () {
+function login() {
+  const correo = document.getElementById('emailInput').value;
+  const password = document.getElementById('passwordInput').value;
+
+  auth.signInWithEmailAndPassword(correo, password)
+    .then(function () {
       let user = auth.currentUser;
       let database_ref = database.ref();
+      const date = new Date();
 
       var user_data = {
-        last_login: Date.now(),
+        last_login: date.toLocaleDateString(),
       }
 
-      database_ref.update(user_data);
+      database_ref.child('users/' + user.uid).update(user_data);
 
       console.log('Usario ingreso');
-      alert('Usario ingreso');
+      console.log(user.uid);
+      localStorage.setItem('user_uid',user.uid);
 
     })
-    .catch(function (error) {
-      console.log(error);
-      alert('Proceso falla');
-    })*/
+    .catch((err) => {
+      console.log(err.code);
+      console.log(err.message);
+     
+    });
+}
