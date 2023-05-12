@@ -98,12 +98,12 @@ window.addEventListener("load", function () {
       .then(function () {
           let user = auth.currentUser;
           //let database_ref =  database.ref();
-        
+          const date = new Date();
           var user_data = {
               email: correo.value,
               nombre: nombre.value,
-              
-              last_login: Date.toString()
+              score:0,
+              last_login: date.toLocaleString()
           };
           
           database.ref('users/'+ user.uid).set(user_data);
