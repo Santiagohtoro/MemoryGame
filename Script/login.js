@@ -34,14 +34,14 @@ function login() {
       const date = new Date();
 
       var user_data = {
-        last_login: date.toLocaleDateString(),
+        last_login: date.toLocaleString(),
       }
 
       database_ref.child('users/' + user.uid).update(user_data);
 
       console.log('Usario ingreso');
       console.log(user.uid);
-      localStorage.setItem('user_uid',user.uid);
+      sessionStorage.setItem('user_uid',user.uid);
 
     })
     .catch((err) => {
