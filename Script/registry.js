@@ -1,8 +1,7 @@
 
 window.addEventListener("load", function () {
-    document.addEventListener('DOMContentLoaded', function () {
-        document.getElementById('registerForm').addEventListener('submit', validarFormulario);
-    });
+   
+    document.getElementById('btnSend').addEventListener('submit', validarFormulario);
 
     function validarFormulario(evento) {
         evento.preventDefault();

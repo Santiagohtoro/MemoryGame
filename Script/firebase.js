@@ -40,9 +40,27 @@
               password: password.value,
               last_login: Date.now()
           };
-          alert(user_data)
+          
           database.ref('users/'+ user.uid).set(user_data);
-          window.alert("LISTOOO")
-      });
+          registroCorrecto()
+      }).catch(function (error) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: error
+        })
+      }
+    );
      
+    function registroCorrecto() {
+      setTimeout(() => {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Your work has been saved',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      }, 1000);
+    }
   }

@@ -24,7 +24,7 @@
                         <div class="containerRow">
                             <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                                 <p class="containerText">Registro</p>
-                                <form class="mx-1 mx-md-4" action="#" id="registerForm" name="registerForm">
+                                <form  target="_blank" class="mx-1 mx-md-4" id="registerForm" name="registerForm">
                                     <div class="containerDiv">
                                         <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
@@ -36,7 +36,7 @@
                                     <div class="containerDiv">
                                         <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input type="text" id="emailInput" minlength="8" required
+                                            <input type="email" id="emailInput" minlength="8" required
                                                 class="form-control" />
                                             <label class="form-label" for="form3Example3c">Tu correo</label>
                                         </div>
@@ -44,8 +44,8 @@
                                     <div class="containerDiv">
                                         <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input type="password" id="passwordInput" minlength="8" required
-                                                class="form-control" />
+                                            <input type="password" id="passwordInput" minlength="8" 
+                                                class="form-control" required pattern="^(?=.*[a-z])(?=.*[A-Z]).+$"/>
                                             <label class="form-label" for="form3Example4c">Contraseña</label>
                                         </div>
                                     </div>
@@ -65,8 +65,9 @@
                                                 target="_blank">Terminos y Condiciones</a>
                                         </label>
                                     </div>
+                                    <!--Disable Error-->
                                     <div class="containerButton">
-                                        <button type="submit" class="btnSend" onclick="registrarse()" id="btnSend" disabled style="opacity: 0.7;">Register</button>
+                                        <button class="btnSend" onclick="registrarse()" id="btnSend" disabled style="opacity: 0.7;">Register</button>
                                     </div>
                                     <div class="link">
                                         <label>¿Ya tienes una cuenta?</label><a href="login.html">Ingresa aqui</a>
@@ -88,7 +89,7 @@
 <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="../Script/firebase.js"></script>
 
 </html>
