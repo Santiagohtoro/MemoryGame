@@ -44,6 +44,37 @@ window.addEventListener("load", function () {
       verb: ["choose", "chosen", "chosen"],
     },
   ];
+
+  //FireBase
+  const firebaseConfig = {
+    apiKey: "AIzaSyDXSh0QIZhI8gGgejGEt2axn39m0JZiZnE",
+    authDomain: "memorygame-97e68.firebaseapp.com",
+    databaseURL: "https://memorygame-97e68-default-rtdb.firebaseio.com",
+    projectId: "memorygame-97e68",
+    storageBucket: "memorygame-97e68.appspot.com",
+    messagingSenderId: "1014281328293",
+    appId: "1:1014281328293:web:035d98b1d227dfbd2b9f4c",
+    measurementId: "G-57G1EXF8YX"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  const userData = firebase.database().ref('users/' + sessionStorage.getItem('user_uid'));
+  const userName = firebase.database().ref('users/' + sessionStorage.getItem('user_uid') + '/nombre');
+
+  userData.on("value", function (snapshot) {
+    console.log(snapshot.val());
+  });
+
+  userName.on("value", function (snapshot) {
+    console.log(snapshot.val());
+
+    document.getElementById('tagUser').innerText = "Usuario: " + snapshot.val();
+  });
+
+  //Cartas funcionalidades
+
   cardsMapping();
   shuffleCards();
   start.addEventListener("click", function () {
@@ -84,15 +115,12 @@ window.addEventListener("load", function () {
           //primer cambio
           jugadores[currentPlayer].puntaje++;
           document.getElementById("puntajes").innerHTML = `
-           <p${currentPlayer === 0 ? ' class="current-player"' : ""}>${
-            jugadores[0].nombre
-          }: ${jugadores[0].puntaje}</p>
-           <p${currentPlayer === 1 ? ' class="current-player"' : ""}>${
-            jugadores[1].nombre
-          }: ${jugadores[1].puntaje}</p>
-           <p${currentPlayer === 2 ? ' class="current-player"' : ""}>${
-            jugadores[2].nombre
-          }: ${jugadores[2].puntaje}</p>
+           <p${currentPlayer === 0 ? ' class="current-player"' : ""}>${jugadores[0].nombre
+            }: ${jugadores[0].puntaje}</p>
+           <p${currentPlayer === 1 ? ' class="current-player"' : ""}>${jugadores[1].nombre
+            }: ${jugadores[1].puntaje}</p>
+           <p${currentPlayer === 2 ? ' class="current-player"' : ""}>${jugadores[2].nombre
+            }: ${jugadores[2].puntaje}</p>
              `;
           flippedCards = [];
         } else {
@@ -102,15 +130,12 @@ window.addEventListener("load", function () {
             //segundo cambio
             currentPlayer = (currentPlayer + 1) % 3;
             document.getElementById("puntajes").innerHTML = `
-           <p${currentPlayer === 0 ? ' class="current-player"' : ""}>${
-              jugadores[0].nombre
-            }: ${jugadores[0].puntaje}</p>
-           <p${currentPlayer === 1 ? ' class="current-player"' : ""}>${
-              jugadores[1].nombre
-            }: ${jugadores[1].puntaje}</p>
-           <p${currentPlayer === 2 ? ' class="current-player"' : ""}>${
-              jugadores[2].nombre
-            }: ${jugadores[2].puntaje}</p>
+           <p${currentPlayer === 0 ? ' class="current-player"' : ""}>${jugadores[0].nombre
+              }: ${jugadores[0].puntaje}</p>
+           <p${currentPlayer === 1 ? ' class="current-player"' : ""}>${jugadores[1].nombre
+              }: ${jugadores[1].puntaje}</p>
+           <p${currentPlayer === 2 ? ' class="current-player"' : ""}>${jugadores[2].nombre
+              }: ${jugadores[2].puntaje}</p>
          `;
           }, 1000);
         }

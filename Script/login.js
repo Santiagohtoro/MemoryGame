@@ -40,9 +40,9 @@ function login() {
       database_ref.child('users/' + user.uid).update(user_data);
 
       console.log('Usario ingreso');
-      console.log(user.uid);
+      console.log(user);
       sessionStorage.setItem('user_uid',user.uid);
-
+      window.location.href = 'index.html';
     })
     .catch((err) => {
       console.log(err.code);
