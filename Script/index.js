@@ -1,4 +1,7 @@
 window.addEventListener("load", function () {
+  if (sessionStorage.getItem("user_uid") == null) {
+    location.replace("./login.html");
+  }
   const start = document.querySelector(".start");
   const reset = document.querySelector(".reset");
   const cardContainer = document.querySelector(".card-grid");
@@ -59,12 +62,16 @@ window.addEventListener("load", function () {
 
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
-
+  var nuevosDatos = {
+    status: "inside"
+  };
   const userData = firebase.database().ref('users/' + sessionStorage.getItem('user_uid'));
   const userName = firebase.database().ref('users/' + sessionStorage.getItem('user_uid') + '/nombre');
-
+  userData.update(nuevosDatos)
   userData.on("value", function (snapshot) {
     console.log(snapshot.val());
+    const dataInfo = snapshot.val()
+    sessionStorage.setItem("user" , JSON.stringify(dataInfo))
   });
 
   userName.on("value", function (snapshot) {
@@ -236,4 +243,21 @@ window.addEventListener("load", function () {
   reset.addEventListener("click", function () {
     window.location.href = "index.html"; // redirige a la página principal
   });
+
+
+  cerrarSession()
+  function cerrarSession(){
+    const btnSalir = document.querySelector(".logout")
+    btnSalir.addEventListener("click", function () {
+      var salir = {
+        status: "out"
+      };
+      userData.update(salir)
+      sessionStorage.clear();
+      location.replace("./login.html")
+    })
+  }
+  
+  
+
 });

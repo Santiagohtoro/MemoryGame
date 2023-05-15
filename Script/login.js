@@ -32,21 +32,33 @@ function login() {
       let user = auth.currentUser;
       let database_ref = database.ref();
       const date = new Date();
-
-      var user_data = {
-        last_login: date.toLocaleString(),
+      if(user.status !== "inside"){
+        var user_data = {
+          last_login: date.toLocaleString(),
+          status: "inside"
+        }
+  
+        database_ref.child('users/' + user.uid).update(user_data);
+  
+        console.log('Usario ingreso');
+        console.log(user);
+        sessionStorage.setItem('user_uid',user.uid);
+        window.location.href = 'index.html';
+      }else{
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: "Ya tiene una sesion activa"
+        })
+        location.reload()
       }
-
-      database_ref.child('users/' + user.uid).update(user_data);
-
-      console.log('Usario ingreso');
-      console.log(user);
-      sessionStorage.setItem('user_uid',user.uid);
-      window.location.href = 'index.html';
+      
     })
     .catch((err) => {
-      console.log(err.code);
-      console.log(err.message);
-     
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: err
+      })
     });
 }
