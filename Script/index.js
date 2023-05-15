@@ -1,3 +1,4 @@
+
   window.addEventListener("load", function () {
     const start = document.querySelector(".start");
     const reset = document.querySelector(".reset");
@@ -86,6 +87,25 @@
             <p${currentPlayer === 1 ? ' class="current-player"' : ''}>${jugadores[1].nombre}: ${jugadores[1].puntaje}</p>
             <p${currentPlayer === 2 ? ' class="current-player"' : ''}>${jugadores[2].nombre}: ${jugadores[2].puntaje}</p>
               `;
+                // Verificar si la suma de puntajes es igual a 10
+  const totalPuntajes = jugadores.reduce((sum, jugador) => sum + jugador.puntaje, 0);
+  if (totalPuntajes === 10) {
+    // Buscar al jugador con mayor puntaje
+    let maxPuntaje = 0;
+    let ganador = null;
+    for (let i = 0; i < jugadores.length; i++) {
+      if (jugadores[i].puntaje > maxPuntaje) {
+        maxPuntaje = jugadores[i].puntaje;
+        ganador = jugadores[i];
+      }
+      Swal.fire({
+        title: `¡${ganador.nombre} ha ganado con ${ganador.puntaje} puntos!`,
+        icon: "success",
+        confirmButtonText: "Aceptar"
+      }).then(() => {  // Detener el juego
+      });
+    }
+}
             flippedCards = [];
           } else {
             setTimeout(() => {
