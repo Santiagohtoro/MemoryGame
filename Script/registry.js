@@ -103,7 +103,8 @@ window.addEventListener("load", function () {
               email: correo.value,
               nombre: nombre.value,
               score:0,
-              last_login: date.toLocaleString()
+              last_login: date.toLocaleString(),
+              status: "logged"
           };
           
           database.ref('users/'+ user.uid).set(user_data);

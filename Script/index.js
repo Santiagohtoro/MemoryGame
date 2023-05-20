@@ -1,4 +1,7 @@
 window.addEventListener("load", function () {
+  if (sessionStorage.getItem("user_uid") == null) {
+    location.replace("./login.html");
+  }
   const start = document.querySelector(".start");
   const reset = document.querySelector(".reset");
   const cardContainer = document.querySelector(".card-grid");
@@ -59,12 +62,16 @@ window.addEventListener("load", function () {
 
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
-
+  var nuevosDatos = {
+    status: "inside"
+  };
   const userData = firebase.database().ref('users/' + sessionStorage.getItem('user_uid'));
   const userName = firebase.database().ref('users/' + sessionStorage.getItem('user_uid') + '/nombre');
-
+  userData.update(nuevosDatos)
   userData.on("value", function (snapshot) {
     console.log(snapshot.val());
+    const dataInfo = snapshot.val()
+    sessionStorage.setItem("user" , JSON.stringify(dataInfo))
   });
 
   userName.on("value", function (snapshot) {
@@ -123,6 +130,7 @@ window.addEventListener("load", function () {
             }: ${jugadores[2].puntaje}</p>
              `;
           flippedCards = [];
+          ganador();
         } else {
           setTimeout(() => {
             flippedCards.forEach((card) => card.classList.remove("flipped"));
@@ -207,6 +215,28 @@ window.addEventListener("load", function () {
       card.style.order = randomPosition;
     });
   }
+  function ganador(){
+       // Verificar si la suma de puntajes es igual a 10
+  const totalPuntajes = jugadores.reduce((sum, jugador) => sum + jugador.puntaje, 0);
+  if (totalPuntajes === 10) {
+    // Buscar al jugador con mayor puntaje
+    let maxPuntaje = 0;
+    let ganador = null;
+    for (let i = 0; i < jugadores.length; i++) {
+      if (jugadores[i].puntaje > maxPuntaje) {
+        maxPuntaje = jugadores[i].puntaje;
+        ganador = jugadores[i];
+      }
+      Swal.fire({
+        title: `¡${ganador.nombre} ha ganado con ${ganador.puntaje} puntos!`,
+        icon: "success",
+        confirmButtonText: "Aceptar"
+      }).then(() => {  // Detener el juego
+      });
+    }
+}
+
+  }
 
   function cardsMapping() {
     verbs.forEach((element) => {
@@ -236,4 +266,21 @@ window.addEventListener("load", function () {
   reset.addEventListener("click", function () {
     window.location.href = "index.html"; // redirige a la página principal
   });
+
+
+  cerrarSession()
+  function cerrarSession(){
+    const btnSalir = document.querySelector(".logout")
+    btnSalir.addEventListener("click", function () {
+      var salir = {
+        status: "out"
+      };
+      userData.update(salir)
+      sessionStorage.clear();
+      location.replace("./login.html")
+    })
+  }
+  
+  
+
 });
