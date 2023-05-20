@@ -71,7 +71,7 @@ window.addEventListener("load", function () {
   userData.on("value", function (snapshot) {
     console.log(snapshot.val());
     const dataInfo = snapshot.val()
-    sessionStorage.setItem("user" , JSON.stringify(dataInfo))
+    sessionStorage.setItem("user", JSON.stringify(dataInfo))
   });
 
   userName.on("value", function (snapshot) {
@@ -215,26 +215,26 @@ window.addEventListener("load", function () {
       card.style.order = randomPosition;
     });
   }
-  function ganador(){
-       // Verificar si la suma de puntajes es igual a 10
-  const totalPuntajes = jugadores.reduce((sum, jugador) => sum + jugador.puntaje, 0);
-  if (totalPuntajes === 10) {
-    // Buscar al jugador con mayor puntaje
-    let maxPuntaje = 0;
-    let ganador = null;
-    for (let i = 0; i < jugadores.length; i++) {
-      if (jugadores[i].puntaje > maxPuntaje) {
-        maxPuntaje = jugadores[i].puntaje;
-        ganador = jugadores[i];
+  function ganador() {
+    // Verificar si la suma de puntajes es igual a 10
+    const totalPuntajes = jugadores.reduce((sum, jugador) => sum + jugador.puntaje, 0);
+    if (totalPuntajes === 10) {
+      // Buscar al jugador con mayor puntaje
+      let maxPuntaje = 0;
+      let ganador = null;
+      for (let i = 0; i < jugadores.length; i++) {
+        if (jugadores[i].puntaje > maxPuntaje) {
+          maxPuntaje = jugadores[i].puntaje;
+          ganador = jugadores[i];
+        }
+        Swal.fire({
+          title: `¡${ganador.nombre} ha ganado con ${ganador.puntaje} puntos!`,
+          icon: "success",
+          confirmButtonText: "Aceptar"
+        }).then(() => {  // Detener el juego
+        });
       }
-      Swal.fire({
-        title: `¡${ganador.nombre} ha ganado con ${ganador.puntaje} puntos!`,
-        icon: "success",
-        confirmButtonText: "Aceptar"
-      }).then(() => {  // Detener el juego
-      });
     }
-}
 
   }
 
@@ -269,7 +269,7 @@ window.addEventListener("load", function () {
 
 
   cerrarSession()
-  function cerrarSession(){
+  function cerrarSession() {
     const btnSalir = document.querySelector(".logout")
     btnSalir.addEventListener("click", function () {
       var salir = {
@@ -280,7 +280,19 @@ window.addEventListener("load", function () {
       location.replace("./login.html")
     })
   }
-  
-  
 
 });
+
+function abrirPopUp() {
+  const open = document.getElementById('open');
+  const modal_container = document.getElementById('modal_container');
+  const close = document.getElementById('close');
+
+  open.addEventListener('click', () => {
+    modal_container.classList.add('show');
+  });
+
+  close.addEventListener('click', () => {
+    modal_container.classList.remove('show');
+  });
+}
