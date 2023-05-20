@@ -1,4 +1,7 @@
 window.addEventListener("load", function () {
+  if (sessionStorage.getItem("user_uid") == null) {
+    location.replace("./login.html");
+  }
   const start = document.querySelector(".start");
   const reset = document.querySelector(".reset");
   const cardContainer = document.querySelector(".card-grid");
@@ -44,6 +47,41 @@ window.addEventListener("load", function () {
       verb: ["choose", "chosen", "chosen"],
     },
   ];
+
+  //FireBase
+  const firebaseConfig = {
+    apiKey: "AIzaSyDXSh0QIZhI8gGgejGEt2axn39m0JZiZnE",
+    authDomain: "memorygame-97e68.firebaseapp.com",
+    databaseURL: "https://memorygame-97e68-default-rtdb.firebaseio.com",
+    projectId: "memorygame-97e68",
+    storageBucket: "memorygame-97e68.appspot.com",
+    messagingSenderId: "1014281328293",
+    appId: "1:1014281328293:web:035d98b1d227dfbd2b9f4c",
+    measurementId: "G-57G1EXF8YX"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  var nuevosDatos = {
+    status: "inside"
+  };
+  const userData = firebase.database().ref('users/' + sessionStorage.getItem('user_uid'));
+  const userName = firebase.database().ref('users/' + sessionStorage.getItem('user_uid') + '/nombre');
+  userData.update(nuevosDatos)
+  userData.on("value", function (snapshot) {
+    console.log(snapshot.val());
+    const dataInfo = snapshot.val()
+    sessionStorage.setItem("user" , JSON.stringify(dataInfo))
+  });
+
+  userName.on("value", function (snapshot) {
+    console.log(snapshot.val());
+
+    document.getElementById('tagUser').innerText = "Usuario: " + snapshot.val();
+  });
+
+  //Cartas funcionalidades
+
   cardsMapping();
   shuffleCards();
   start.addEventListener("click", function () {
@@ -64,7 +102,7 @@ window.addEventListener("load", function () {
 
     cards.forEach((card) => card.addEventListener("click", flipCard));
 
-    function flipCard() {
+    function flipCard(e) {
       if (flippedCards.length < 3) {
         this.classList.add("flipped");
         flippedCards.push(this);
@@ -73,24 +111,40 @@ window.addEventListener("load", function () {
       if (flippedCards.length === 3) {
         const isSameValue =
           flippedCards[0].dataset.value === flippedCards[1].dataset.value &&
-          flippedCards[1].dataset.value === flippedCards[2].dataset.value;
+          flippedCards[1].dataset.value === flippedCards[2].dataset.value &&
+          flippedCards[0].dataset.verb !== flippedCards[1].dataset.verb;
+        console.log();
 
         if (isSameValue) {
           flippedCards.forEach((card) =>
             card.removeEventListener("click", flipCard)
           );
+          //primer cambio
           jugadores[currentPlayer].puntaje++;
           document.getElementById("puntajes").innerHTML = `
-              <p>${jugadores[0].nombre}: ${jugadores[0].puntaje}</p>
-              <p>${jugadores[1].nombre}: ${jugadores[1].puntaje}</p>
-              <p>${jugadores[2].nombre}: ${jugadores[2].puntaje}</p>
-            `;
+           <p${currentPlayer === 0 ? ' class="current-player"' : ""}>${jugadores[0].nombre
+            }: ${jugadores[0].puntaje}</p>
+           <p${currentPlayer === 1 ? ' class="current-player"' : ""}>${jugadores[1].nombre
+            }: ${jugadores[1].puntaje}</p>
+           <p${currentPlayer === 2 ? ' class="current-player"' : ""}>${jugadores[2].nombre
+            }: ${jugadores[2].puntaje}</p>
+             `;
           flippedCards = [];
+          ganador();
         } else {
           setTimeout(() => {
             flippedCards.forEach((card) => card.classList.remove("flipped"));
             flippedCards = [];
+            //segundo cambio
             currentPlayer = (currentPlayer + 1) % 3;
+            document.getElementById("puntajes").innerHTML = `
+           <p${currentPlayer === 0 ? ' class="current-player"' : ""}>${jugadores[0].nombre
+              }: ${jugadores[0].puntaje}</p>
+           <p${currentPlayer === 1 ? ' class="current-player"' : ""}>${jugadores[1].nombre
+              }: ${jugadores[1].puntaje}</p>
+           <p${currentPlayer === 2 ? ' class="current-player"' : ""}>${jugadores[2].nombre
+              }: ${jugadores[2].puntaje}</p>
+         `;
           }, 1000);
         }
       }
@@ -98,7 +152,8 @@ window.addEventListener("load", function () {
       if (flippedCards.length === 3) {
         const isSameValue =
           flippedCards[0].dataset.value === flippedCards[1].dataset.value &&
-          flippedCards[1].dataset.value === flippedCards[2].dataset.value;
+          flippedCards[1].dataset.value === flippedCards[2].dataset.value &&
+          flippedCards[0].dataset.verb !== flippedCards[1].dataset.verb;
 
         if (isSameValue) {
           flippedCards.forEach((card) =>
@@ -131,7 +186,7 @@ window.addEventListener("load", function () {
       // Mezclar y asignar valores de las cartas
       // ...
     }
-
+    /*
     cardValues.forEach((value) => {
       const valueCards = document.querySelectorAll(
         `.card[data-value="${value}"]`
@@ -142,7 +197,7 @@ window.addEventListener("load", function () {
           card.removeEventListener("click", flipCard);
         });
       }
-    });
+    });*/
   });
   let jugadores = [
     { nombre: "", puntaje: 0 },
@@ -160,10 +215,31 @@ window.addEventListener("load", function () {
       card.style.order = randomPosition;
     });
   }
+  function ganador(){
+       // Verificar si la suma de puntajes es igual a 10
+  const totalPuntajes = jugadores.reduce((sum, jugador) => sum + jugador.puntaje, 0);
+  if (totalPuntajes === 10) {
+    // Buscar al jugador con mayor puntaje
+    let maxPuntaje = 0;
+    let ganador = null;
+    for (let i = 0; i < jugadores.length; i++) {
+      if (jugadores[i].puntaje > maxPuntaje) {
+        maxPuntaje = jugadores[i].puntaje;
+        ganador = jugadores[i];
+      }
+      Swal.fire({
+        title: `¡${ganador.nombre} ha ganado con ${ganador.puntaje} puntos!`,
+        icon: "success",
+        confirmButtonText: "Aceptar"
+      }).then(() => {  // Detener el juego
+      });
+    }
+}
+
+  }
 
   function cardsMapping() {
     verbs.forEach((element) => {
-      
       cardContainer.innerHTML += `
       <div class="card" data-verb="${element.verb[0]}" data-value="${element.id}">
       <div class="card-flipper">
@@ -190,4 +266,21 @@ window.addEventListener("load", function () {
   reset.addEventListener("click", function () {
     window.location.href = "index.html"; // redirige a la página principal
   });
+
+
+  cerrarSession()
+  function cerrarSession(){
+    const btnSalir = document.querySelector(".logout")
+    btnSalir.addEventListener("click", function () {
+      var salir = {
+        status: "out"
+      };
+      userData.update(salir)
+      sessionStorage.clear();
+      location.replace("./login.html")
+    })
+  }
+  
+  
+
 });

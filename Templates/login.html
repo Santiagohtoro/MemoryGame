@@ -1,30 +1,37 @@
 <!doctype html>
 <html lang="es">
-    
-    <head>
-        <link rel="stylesheet" href="../Styles/login.css">
-    </head>
-    <body>
-        <div id="contenedor">
-            <div id="central">
-                <div id="login">
-                    <div class="titulo">
-                        Bienvenido
-                    </div>
-                    <form id="loginform">
-                        <input type="text" name="usuario" placeholder="Usuario" required>
-                        
-                        <input type="password" placeholder="Contraseña" name="password" required>
-                        
-                        <button type="submit" title="Ingresar" name="Ingresar">Iniciar sesion</button>
-                    </form>
-                    <div class="pie-form">
-                        <a href="#">¿No tienes Cuenta? Registrate</a>
-                    </div>
-                </div>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../Styles/login.css">
+   
+</head>
+
+<body>
+    <div id="contenedor">
+        <div id="central">
+            <div id="login">
+                <div class="titulo">Bienvenido</div>
+                <form id="loginform">
+                    <input type="text" name="usuario" placeholder="Usuario" required id="emailInput">
+                    <input type="password" placeholder="Contraseña" name="password" required id="passwordInput">
+                    <button title="Ingresar" name="Ingresar" onclick="login()" type="button">Iniciar sesion</button>
+                </form>
+                <div class="pie-form">
+                    <a href="registry.html">¿No tienes Cuenta? Registrate</a>
                 </div>
             </div>
         </div>
-            
-    </body>
+    </div>
+    </div>
+</body>
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="../Script/login.js"></script>
+
 </html>

@@ -12,7 +12,8 @@
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
     <script src="../Script/registry.js"></script>
-    <title>Registry</title>
+
+    <title>Registro</title>
 </head>
 
 <body>
@@ -24,11 +25,11 @@
                         <div class="containerRow">
                             <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                                 <p class="containerText">Registro</p>
-                                <form class="mx-1 mx-md-4" action="#" id="registerForm" name="registerForm">
+                                <form target="_blank" class="mx-1 mx-md-4" id="registerForm" name="registerForm">
                                     <div class="containerDiv">
                                         <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input type="text" id="nameInput" class="form-control"
+                                            <input type="text" id="nameInput" required class="form-control"
                                                 autofocus="autofocus" />
                                             <label class="form-label" for="form3Example1c">Tu nombre</label>
                                         </div>
@@ -36,36 +37,39 @@
                                     <div class="containerDiv">
                                         <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input type="text" id="emailInput" class="form-control" />
+                                            <input type="email" id="emailInput" required class="form-control" />
                                             <label class="form-label" for="form3Example3c">Tu correo</label>
                                         </div>
                                     </div>
                                     <div class="containerDiv">
                                         <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input type="password" id="passwordInput" class="form-control" />
+                                            <input type="password" id="passwordInput" class="form-control" required />
                                             <label class="form-label" for="form3Example4c">Contraseña</label>
                                         </div>
                                     </div>
                                     <div class="containerDiv">
                                         <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input type="password" id="reviewPassword" class="form-control" />
+                                            <input type="password" id="reviewPassword" required class="form-control" />
                                             <label class="form-label" for="form3Example4cd">Repite tu contraseña</label>
                                         </div>
                                     </div>
                                     <div class="containerConditions">
-                                        <input class="form-check-input me-2" type="checkbox" id="selectTermsConditions"
-                                            onclick="verificarCheck()" />
+                                        <input class="form-check-input me-2" type="checkbox"
+                                            id="selectTermsConditions" />
                                         <label class="TermConditions" for="form2Example3">
                                             Acepto los <a href="../static/Documents/TerminosCondiciones.pdf"
                                                 target="_blank">Terminos y Condiciones</a>
                                         </label>
                                     </div>
+                                    <!--Disable Error-->
                                     <div class="containerButton">
-                                        <button type="submit" class="btnSend" id="btnSend" >Register</button>
-                                        <div class="spaceButton"></div>
-                                        <button type="button" class="btnSend" onclick="goLogIn()">Log In</button>
+                                        <button class="btnSend" id="btnSend" disabled
+                                            style="opacity: 0.7;">Register</button>
+                                    </div>
+                                    <div class="link">
+                                        <label>¿Ya tienes una cuenta?</label><a href="login.html">Ingresa aqui</a>
                                     </div>
                                 </form>
                             </div>
@@ -81,5 +85,9 @@
         <img src="../static/Images/NFTBrand.png" class="companyBrand">
     </section>
 </body>
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </html>
