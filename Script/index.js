@@ -2,8 +2,8 @@ window.addEventListener("load", function () {
   if (sessionStorage.getItem("user_uid") == null) {
     location.replace("./login.html");
   }
-  const start = document.querySelector(".start");
-  const reset = document.querySelector(".reset");
+  const start = document.querySelector(".btnStart");
+  const reset = document.querySelector(".btnReset");
   const cardContainer = document.querySelector(".card-grid");
   const verbs = [
     {
