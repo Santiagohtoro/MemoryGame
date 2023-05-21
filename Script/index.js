@@ -284,9 +284,9 @@ window.addEventListener("load", function () {
 });
 
 function abrirPopUp() {
-  const open = document.getElementById('open');
+  const open = document.getElementById('btnOpen');
   const modal_container = document.getElementById('modal_container');
-  const close = document.getElementById('close');
+  const close = document.getElementById('btnClose');
 
   open.addEventListener('click', () => {
     modal_container.classList.add('show');

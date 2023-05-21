@@ -71,7 +71,7 @@ input {
     box-shadow: 0px 0px 5px grey;
 }
 
-button {
+.btnStart, .btnReset, #btnOpen, #btnClose {
     display: block;
     margin-top: 10px;
     padding: 10px;
@@ -81,7 +81,15 @@ button {
     color: #fff;
     font-size: 16px;
     cursor: pointer;
-    box-shadow: 0px 4px
+    box-shadow: 0px 4px;
+}
+
+.btnStart:hover, .btnReset:hover, #btnOpen:hover, #btnClose:hover{
+    opacity: 0.7;
+}
+
+#logout:hover{
+    opacity: 0.7;
 }
 
 #puntajes {
@@ -126,16 +134,6 @@ h1 {
 }
 
 /*PopUp manual*/
-
-#open button {
-    background-color: #1295a3;
-    border: 0;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    color: #fff;
-    font-size: 14px;
-    padding: 10px 25px;
-}
 
 .modal-container {
     display: flex;
