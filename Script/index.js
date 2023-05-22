@@ -90,41 +90,7 @@ window.addEventListener("load", function () {
   shuffleCards();
   start.addEventListener("click", startGame);
 
-  function createGame(players) {
-    var gameRef = firebase.database().ref("game/").push();
-
-    var partida = {
-      players,
-      estado: "en_curso",
-    };
-
-    gameRef
-      .set(partida)
-      .then(() => {
-        console.log("Partida creada con ID:", gameRef.key);
-        return gameRef.key; // Devuelve el ID de la partida
-      })
-      .catch((error) => {
-        console.error("Error al crear la partida:", error);
-        return null;
-      });
-  }
-
-  // Función para actualizar la puntuación de un jugador en la base de datos
-  function actualizarPuntuacionJugador(jugadorId, nuevaPuntuacion) {
-    // Obtén una referencia al nodo del jugador que deseas actualizar
-    const jugadorRef = firebase.database().ref("jugadores").child(jugadorId);
-
-    // Actualiza la puntuación del jugador en la base de datos
-    jugadorRef
-      .update({ puntuacion: nuevaPuntuacion })
-      .then(() => {
-        console.log("Puntuación del jugador actualizada correctamente");
-      })
-      .catch((error) => {
-        console.error("Error al actualizar la puntuación del jugador:", error);
-      });
-  }
+ 
 
   function startGame() {
     jugadores[0].nombre = document.getElementById("nombre-jugador-1").value;
@@ -139,8 +105,7 @@ window.addEventListener("load", function () {
             <p>${jugadores[2].nombre}: ${jugadores[2].puntaje}</p>
             
           `;
-    console.log(jugadores);
-    const idPartida = createGame(jugadores);
+
     const cards = document.querySelectorAll(".card");
     let flippedCards = [];
 
