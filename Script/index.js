@@ -10,42 +10,42 @@ window.addEventListener("load", function () {
       id: "1",
       verb: ["be", "was/were", "been"],
     },
-    {
-      id: "2",
-      verb: ["buy", "bought", "bought"],
-    },
-    {
-      id: "3",
-      verb: ["begin", "began", "begun"],
-    },
-    {
-      id: "4",
-      verb: ["drive", "drove", "driven"],
-    },
-    {
-      id: "5",
-      verb: ["drink", "drank", "drunk"],
-    },
-    {
-      id: "6",
-      verb: ["feel", "felt", "felt"],
-    },
-    {
-      id: "7",
-      verb: ["draw", "drew", "drawn"],
-    },
-    {
-      id: "8",
-      verb: ["dig", "dug", "dug"],
-    },
-    {
-      id: "9",
-      verb: ["eat", "ate", "eaten"],
-    },
-    {
-      id: "10",
-      verb: ["choose", "chosen", "chosen"],
-    },
+    // {
+    //   id: "2",
+    //   verb: ["buy", "bought", "bought"],
+    // },
+    // {
+    //   id: "3",
+    //   verb: ["begin", "began", "begun"],
+    // },
+    // {
+    //   id: "4",
+    //   verb: ["drive", "drove", "driven"],
+    // },
+    // {
+    //   id: "5",
+    //   verb: ["drink", "drank", "drunk"],
+    // },
+    // {
+    //   id: "6",
+    //   verb: ["feel", "felt", "felt"],
+    // },
+    // {
+    //   id: "7",
+    //   verb: ["draw", "drew", "drawn"],
+    // },
+    // {
+    //   id: "8",
+    //   verb: ["dig", "dug", "dug"],
+    // },
+    // {
+    //   id: "9",
+    //   verb: ["eat", "ate", "eaten"],
+    // },
+    // {
+    //   id: "10",
+    //   verb: ["choose", "chosen", "chosen"],
+    // },
   ];
 
   //FireBase
@@ -62,12 +62,17 @@ window.addEventListener("load", function () {
 
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
+  const database = firebase.database();
+
   var nuevosDatos = {
     status: "inside"
   };
+
   const userData = firebase.database().ref('users/' + sessionStorage.getItem('user_uid'));
   const userName = firebase.database().ref('users/' + sessionStorage.getItem('user_uid') + '/nombre');
+  let user_uid = this.sessionStorage.getItem('user_uid');
   userData.update(nuevosDatos)
+
   userData.on("value", function (snapshot) {
     console.log(snapshot.val());
     const dataInfo = snapshot.val()
@@ -81,7 +86,6 @@ window.addEventListener("load", function () {
   });
 
   //Cartas funcionalidades
-
   cardsMapping();
   shuffleCards();
   start.addEventListener("click", function () {
@@ -215,6 +219,7 @@ window.addEventListener("load", function () {
       card.style.order = randomPosition;
     });
   }
+
   function ganador() {
     // Verificar si la suma de puntajes es igual a 10
     const totalPuntajes = jugadores.reduce((sum, jugador) => sum + jugador.puntaje, 0);
@@ -226,7 +231,18 @@ window.addEventListener("load", function () {
         if (jugadores[i].puntaje > maxPuntaje) {
           maxPuntaje = jugadores[i].puntaje;
           ganador = jugadores[i];
+          //Firebase student
+          let database_ref = database.ref();
+          let winnerName = ganador.nombre;
+          let points = ganador.puntaje;
+          const usersRef = database_ref.child('users/' + user_uid + '/students/');
+          usersRef.child(winnerName).set({
+            studentName: winnerName,
+            score: points,
+            win: 1,
+          });
         }
+        //Estudiante Ganador
         Swal.fire({
           title: `¡${ganador.nombre} ha ganado con ${ganador.puntaje} puntos!`,
           icon: "success",
@@ -235,7 +251,6 @@ window.addEventListener("load", function () {
         });
       }
     }
-
   }
 
   function cardsMapping() {
@@ -277,7 +292,7 @@ window.addEventListener("load", function () {
       };
       userData.update(salir)
       sessionStorage.clear();
-      location.replace("./login.html")
+      location.replace("./login.html");
     })
   }
 

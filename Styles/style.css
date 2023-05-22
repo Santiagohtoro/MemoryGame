@@ -71,7 +71,11 @@ input {
     box-shadow: 0px 0px 5px grey;
 }
 
-.btnStart, .btnReset, #btnOpen, #btnClose {
+.btnStart,
+.btnReset,
+#btnOpen,
+#btnClose,
+.btnRanking {
     display: block;
     margin-top: 10px;
     padding: 10px;
@@ -84,11 +88,15 @@ input {
     box-shadow: 0px 4px;
 }
 
-.btnStart:hover, .btnReset:hover, #btnOpen:hover, #btnClose:hover{
+.btnStart:hover,
+.btnReset:hover,
+#btnOpen:hover,
+#btnClose:hover,
+.btnRanking:hover {
     opacity: 0.7;
 }
 
-#logout:hover{
+#logout:hover {
     opacity: 0.7;
 }
 

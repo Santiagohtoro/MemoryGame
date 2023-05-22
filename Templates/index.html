@@ -36,17 +36,20 @@
         <div class="modal">
           <h1>Instrucciones de juego</h1>
           <p>
-            Se daran 3 verbos en los tiempos presente, pasado y futuro. El jugador debe encontrar en todas las tarjetass el
+            Se daran 3 verbos en los tiempos presente, pasado y futuro. El jugador debe encontrar en todas las tarjetas el
             verbo en los tiempos mencionados. Gana el jugador que mas verbos haya encontrado en las tarjetas
           </p>
           <button id="btnClose">Cerrar</button>
         </div>
       </div>
     </td>
+    <td>
+      <button class="btnRanking"><a href="ranking.html" style="text-decoration: none; color: white;">Ranking</a></button>
+    </td>
   </table>
-  <input type="text" id="nombre-jugador-1" placeholder="Jugador 1" class="input">
-  <input type="text" id="nombre-jugador-2" placeholder="Jugador 2" class="input">
-  <input type="text" id="nombre-jugador-3" placeholder="Jugador 3" class="input">
+  <input type="text" id="nombre-jugador-1" placeholder="Jugador 1" class="input" minlength="5">
+  <input type="text" id="nombre-jugador-2" placeholder="Jugador 2" class="input" minlength="5">
+  <input type="text" id="nombre-jugador-3" placeholder="Jugador 3" class="input" minlength="5">
   <div id="puntajes">
     <!-- Aquí se mostrarán los puntajes de los jugadores -->
   </div>
@@ -55,8 +58,9 @@
 
   </div>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
 <script src="ruta/a/sweetalert2.all.min.js"></script>
 
