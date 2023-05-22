@@ -57,46 +57,90 @@ window.addEventListener("load", function () {
     storageBucket: "memorygame-97e68.appspot.com",
     messagingSenderId: "1014281328293",
     appId: "1:1014281328293:web:035d98b1d227dfbd2b9f4c",
-    measurementId: "G-57G1EXF8YX"
+    measurementId: "G-57G1EXF8YX",
   };
 
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   var nuevosDatos = {
-    status: "inside"
+    status: "inside",
   };
-  const userData = firebase.database().ref('users/' + sessionStorage.getItem('user_uid'));
-  const userName = firebase.database().ref('users/' + sessionStorage.getItem('user_uid') + '/nombre');
-  userData.update(nuevosDatos)
+  const userData = firebase
+    .database()
+    .ref("users/" + sessionStorage.getItem("user_uid"));
+  const userName = firebase
+    .database()
+    .ref("users/" + sessionStorage.getItem("user_uid") + "/nombre");
+  userData.update(nuevosDatos);
   userData.on("value", function (snapshot) {
     console.log(snapshot.val());
-    const dataInfo = snapshot.val()
-    sessionStorage.setItem("user" , JSON.stringify(dataInfo))
+    const dataInfo = snapshot.val();
+    sessionStorage.setItem("user", JSON.stringify(dataInfo));
   });
 
   userName.on("value", function (snapshot) {
     console.log(snapshot.val());
 
-    document.getElementById('tagUser').innerText = "Usuario: " + snapshot.val();
+    document.getElementById("tagUser").innerText = "Usuario: " + snapshot.val();
   });
 
   //Cartas funcionalidades
 
   cardsMapping();
   shuffleCards();
-  start.addEventListener("click", function () {
+  start.addEventListener("click", startGame);
+
+  function createGame(players) {
+    var gameRef = firebase.database().ref("game/").push();
+
+    var partida = {
+      players,
+      estado: "en_curso",
+    };
+
+    gameRef
+      .set(partida)
+      .then(() => {
+        console.log("Partida creada con ID:", gameRef.key);
+        return gameRef.key; // Devuelve el ID de la partida
+      })
+      .catch((error) => {
+        console.error("Error al crear la partida:", error);
+        return null;
+      });
+  }
+
+  // Función para actualizar la puntuación de un jugador en la base de datos
+  function actualizarPuntuacionJugador(jugadorId, nuevaPuntuacion) {
+    // Obtén una referencia al nodo del jugador que deseas actualizar
+    const jugadorRef = firebase.database().ref("jugadores").child(jugadorId);
+
+    // Actualiza la puntuación del jugador en la base de datos
+    jugadorRef
+      .update({ puntuacion: nuevaPuntuacion })
+      .then(() => {
+        console.log("Puntuación del jugador actualizada correctamente");
+      })
+      .catch((error) => {
+        console.error("Error al actualizar la puntuación del jugador:", error);
+      });
+  }
+
+  function startGame() {
     jugadores[0].nombre = document.getElementById("nombre-jugador-1").value;
     jugadores[1].nombre = document.getElementById("nombre-jugador-2").value;
     jugadores[2].nombre = document.getElementById("nombre-jugador-3").value;
 
     // Mostrar los nombres de los jugadores en la pantalla
-    document.getElementById("puntajes").innerHTML = `
-          <p>${jugadores[0].nombre}: ${jugadores[0].puntaje}</p>
-          <p>${jugadores[1].nombre}: ${jugadores[1].puntaje}</p>
-          <p>${jugadores[2].nombre}: ${jugadores[2].puntaje}</p>
-          
-        `;
 
+    document.getElementById("puntajes").innerHTML = `
+            <p>${jugadores[0].nombre}: ${jugadores[0].puntaje}</p>
+            <p>${jugadores[1].nombre}: ${jugadores[1].puntaje}</p>
+            <p>${jugadores[2].nombre}: ${jugadores[2].puntaje}</p>
+            
+          `;
+    console.log(jugadores);
+    const idPartida = createGame(jugadores);
     const cards = document.querySelectorAll(".card");
     let flippedCards = [];
 
@@ -122,13 +166,16 @@ window.addEventListener("load", function () {
           //primer cambio
           jugadores[currentPlayer].puntaje++;
           document.getElementById("puntajes").innerHTML = `
-           <p${currentPlayer === 0 ? ' class="current-player"' : ""}>${jugadores[0].nombre
-            }: ${jugadores[0].puntaje}</p>
-           <p${currentPlayer === 1 ? ' class="current-player"' : ""}>${jugadores[1].nombre
-            }: ${jugadores[1].puntaje}</p>
-           <p${currentPlayer === 2 ? ' class="current-player"' : ""}>${jugadores[2].nombre
-            }: ${jugadores[2].puntaje}</p>
-             `;
+             <p${currentPlayer === 0 ? ' class="current-player"' : ""}>${
+            jugadores[0].nombre
+          }: ${jugadores[0].puntaje}</p>
+             <p${currentPlayer === 1 ? ' class="current-player"' : ""}>${
+            jugadores[1].nombre
+          }: ${jugadores[1].puntaje}</p>
+             <p${currentPlayer === 2 ? ' class="current-player"' : ""}>${
+            jugadores[2].nombre
+          }: ${jugadores[2].puntaje}</p>
+               `;
           flippedCards = [];
         } else {
           setTimeout(() => {
@@ -137,13 +184,16 @@ window.addEventListener("load", function () {
             //segundo cambio
             currentPlayer = (currentPlayer + 1) % 3;
             document.getElementById("puntajes").innerHTML = `
-           <p${currentPlayer === 0 ? ' class="current-player"' : ""}>${jugadores[0].nombre
-              }: ${jugadores[0].puntaje}</p>
-           <p${currentPlayer === 1 ? ' class="current-player"' : ""}>${jugadores[1].nombre
-              }: ${jugadores[1].puntaje}</p>
-           <p${currentPlayer === 2 ? ' class="current-player"' : ""}>${jugadores[2].nombre
-              }: ${jugadores[2].puntaje}</p>
-         `;
+             <p${currentPlayer === 0 ? ' class="current-player"' : ""}>${
+              jugadores[0].nombre
+            }: ${jugadores[0].puntaje}</p>
+             <p${currentPlayer === 1 ? ' class="current-player"' : ""}>${
+              jugadores[1].nombre
+            }: ${jugadores[1].puntaje}</p>
+             <p${currentPlayer === 2 ? ' class="current-player"' : ""}>${
+              jugadores[2].nombre
+            }: ${jugadores[2].puntaje}</p>
+           `;
           }, 1000);
         }
       }
@@ -163,10 +213,10 @@ window.addEventListener("load", function () {
             if (jugador.nombre === currentPlayer) {
               jugador.puntaje++;
               document.getElementById("puntajes").innerHTML = `
-            <p>${jugadores[0].nombre}: ${jugadores[0].puntaje}</p>
-            <p>${jugadores[1].nombre}: ${jugadores[1].puntaje}</p>
-            <p>${jugadores[2].nombre}: ${jugadores[2].puntaje}</p>
-          `;
+              <p>${jugadores[0].nombre}: ${jugadores[0].puntaje}</p>
+              <p>${jugadores[1].nombre}: ${jugadores[1].puntaje}</p>
+              <p>${jugadores[2].nombre}: ${jugadores[2].puntaje}</p>
+            `;
             }
           });
         } else {
@@ -186,26 +236,27 @@ window.addEventListener("load", function () {
       // ...
     }
     /*
-    cardValues.forEach((value) => {
-      const valueCards = document.querySelectorAll(
-        `.card[data-value="${value}"]`
-      );
-      if (valueCards.length === 3) {
-        valueCards.forEach((card) => {
-          card.classList.add("flipped");
-          card.removeEventListener("click", flipCard);
-        });
-      }
-    });*/
-  });
+      cardValues.forEach((value) => {
+        const valueCards = document.querySelectorAll(
+          `.card[data-value="${value}"]`
+        );
+        if (valueCards.length === 3) {
+          valueCards.forEach((card) => {
+            card.classList.add("flipped");
+            card.removeEventListener("click", flipCard);
+          });
+        }
+      });*/
+  }
+
   let jugadores = [
     { nombre: "", puntaje: 0 },
     { nombre: "", puntaje: 0 },
     { nombre: "", puntaje: 0 },
   ];
   let currentPlayer = 0;
-  let currentPlayerIndex = 0;
-  let flippedCards = [];
+  //let currentPlayerIndex = 0;
+  //let flippedCards = [];
 
   function shuffleCards() {
     const cards = document.querySelectorAll(".card");
@@ -240,24 +291,21 @@ window.addEventListener("load", function () {
     });
   }
 
-  reset.addEventListener("click", function () {
+  reset.addEventListener("click", reiniciarPartida);
+  function reiniciarPartida() {
     window.location.href = "index.html"; // redirige a la página principal
-  });
+  }
 
-
-  cerrarSession()
-  function cerrarSession(){
-    const btnSalir = document.querySelector(".logout")
+  cerrarSession();
+  function cerrarSession() {
+    const btnSalir = document.querySelector(".logout");
     btnSalir.addEventListener("click", function () {
       var salir = {
-        status: "out"
+        status: "out",
       };
-      userData.update(salir)
+      userData.update(salir);
       sessionStorage.clear();
-      location.replace("./login.html")
-    })
+      location.replace("./login.html");
+    });
   }
-  
-  
-
 });
