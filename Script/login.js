@@ -23,6 +23,20 @@ firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const database = firebase.database(); // Para Firestore, o firebase.database() para Realtime Database
 
+function validarSession(uid, callback) {
+  const userData = firebase.database().ref('users/' + uid);
+
+  userData.on("value", function (snapshot) {
+    const data = snapshot.val();
+    console.log(JSON.stringify(data.status));
+    if (data?.status !== "inside") {
+      callback(true);
+    } else {
+      callback(false);
+    }
+  });
+}
+
 function login() {
   const correo = document.getElementById('emailInput').value;
   const password = document.getElementById('passwordInput').value;
@@ -32,27 +46,32 @@ function login() {
       let user = auth.currentUser;
       let database_ref = database.ref();
       const date = new Date();
-      if(user.status !== "inside"){
-        var user_data = {
-          last_login: date.toLocaleString(),
-          status: "inside"
+      validarSession(user.uid, function (resultado) {
+        if(resultado === true){
+          var user_data = {
+            last_login: date.toLocaleString(),
+            status: "inside"
+          }
+    
+          database_ref.child('users/' + user.uid).update(user_data);
+    
+          console.log('Usario ingreso');
+          console.log(user);
+          sessionStorage.setItem('user_uid',user.uid);
+          window.location.href = 'index.html';
         }
-  
-        database_ref.child('users/' + user.uid).update(user_data);
-  
-        console.log('Usario ingreso');
-        console.log(user);
-        sessionStorage.setItem('user_uid',user.uid);
-        window.location.href = 'index.html';
-      }else{
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: "Ya tiene una sesion activa"
-        })
-        location.reload()
-      }
-      
+        if(resultado !== true){
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: "Este usuario ya tiene una seccion activa"
+          })
+          setTimeout(() => {
+            location.reload()
+          }, 2000);
+          
+        }
+      });
     })
     .catch((err) => {
       Swal.fire({
@@ -61,4 +80,7 @@ function login() {
         text: err
       })
     });
+    /*
+    }*/
+    
 }

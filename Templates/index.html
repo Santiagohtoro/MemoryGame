@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="../Styles/style.css">
   <script src="../Script/index.js"></script>
   <title>Verbos Irregulares</title>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -22,10 +23,25 @@
   </div>
   <table>
     <td>
-      <button class="button start">Iniciar Juego</button>
+      <button class="btnStart">Iniciar Juego</button>
     </td>
     <td>
-      <button class="reset" type="submit">Resetear Juego</button>
+      <button class="btnReset" type="submit">Resetear Juego</button>
+    </td>
+    <td>
+      <button id="btnOpen" onclick="abrirPopUp()">
+        Instrucciones
+      </button>
+      <div id="modal_container" class="modal-container">
+        <div class="modal">
+          <h1>Instrucciones de juego</h1>
+          <p>
+            Se daran 3 verbos en los tiempos presente, pasado y futuro. El jugador debe encontrar en todas las tarjetass el
+            verbo en los tiempos mencionados. Gana el jugador que mas verbos haya encontrado en las tarjetas
+          </p>
+          <button id="btnClose">Cerrar</button>
+        </div>
+      </div>
     </td>
   </table>
   <input type="text" id="nombre-jugador-1" placeholder="Jugador 1" class="input">
@@ -42,5 +58,6 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+<script src="ruta/a/sweetalert2.all.min.js"></script>
 
 </html>

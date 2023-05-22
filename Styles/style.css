@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+
 .card-grid {
     display: flex;
     flex-wrap: wrap;
@@ -35,7 +37,8 @@
     transform: rotateY(180deg);
 }
 
-.card-front, .card-back {
+.card-front,
+.card-back {
     width: 100%;
     height: 100%;
     border-radius: 10px;
@@ -68,7 +71,7 @@ input {
     box-shadow: 0px 0px 5px grey;
 }
 
-button {
+.btnStart, .btnReset, #btnOpen, #btnClose {
     display: block;
     margin-top: 10px;
     padding: 10px;
@@ -78,7 +81,15 @@ button {
     color: #fff;
     font-size: 16px;
     cursor: pointer;
-    box-shadow: 0px 4px
+    box-shadow: 0px 4px;
+}
+
+.btnStart:hover, .btnReset:hover, #btnOpen:hover, #btnClose:hover{
+    opacity: 0.7;
+}
+
+#logout:hover{
+    opacity: 0.7;
 }
 
 #puntajes {
@@ -120,4 +131,53 @@ h1 {
     color: #fff;
     background-color: #1295a3;
     font-family: monospace;
+}
+
+/*PopUp manual*/
+
+.modal-container {
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.3);
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    pointer-events: none;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.show {
+    pointer-events: auto;
+    opacity: 1;
+}
+
+.modal {
+    display: block;
+    background-color: #fff;
+    width: 600px;
+    max-width: 100%;
+    padding: 30px 50px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-align: justify;
+    background-color: #edeef6;
+    font-family: 'Poppins', sans-serif;
+}
+
+#close button {
+    background-color: aliceblue;
+}
+
+.modal h1 {
+    margin: 0;
+}
+
+.modal p {
+    opacity: 0.7;
+    font-size: 14px;
 }

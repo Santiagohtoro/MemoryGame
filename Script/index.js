@@ -2,8 +2,8 @@ window.addEventListener("load", function () {
   if (sessionStorage.getItem("user_uid") == null) {
     location.replace("./login.html");
   }
-  const start = document.querySelector(".start");
-  const reset = document.querySelector(".reset");
+  const start = document.querySelector(".btnStart");
+  const reset = document.querySelector(".btnReset");
   const cardContainer = document.querySelector(".card-grid");
   const verbs = [
     {
@@ -142,6 +142,7 @@ window.addEventListener("load", function () {
           }: ${jugadores[2].puntaje}</p>
                `;
           flippedCards = [];
+          ganador();
         } else {
           setTimeout(() => {
             flippedCards.forEach((card) => card.classList.remove("flipped"));
@@ -230,6 +231,28 @@ window.addEventListener("load", function () {
       card.style.order = randomPosition;
     });
   }
+  function ganador() {
+    // Verificar si la suma de puntajes es igual a 10
+    const totalPuntajes = jugadores.reduce((sum, jugador) => sum + jugador.puntaje, 0);
+    if (totalPuntajes === 10) {
+      // Buscar al jugador con mayor puntaje
+      let maxPuntaje = 0;
+      let ganador = null;
+      for (let i = 0; i < jugadores.length; i++) {
+        if (jugadores[i].puntaje > maxPuntaje) {
+          maxPuntaje = jugadores[i].puntaje;
+          ganador = jugadores[i];
+        }
+        Swal.fire({
+          title: `¡${ganador.nombre} ha ganado con ${ganador.puntaje} puntos!`,
+          icon: "success",
+          confirmButtonText: "Aceptar"
+        }).then(() => {  // Detener el juego
+        });
+      }
+    }
+
+  }
 
   function cardsMapping() {
     verbs.forEach((element) => {
@@ -273,4 +296,21 @@ window.addEventListener("load", function () {
       location.replace("./login.html");
     });
   }
+  
+  
+
 });
+
+function abrirPopUp() {
+  const open = document.getElementById('btnOpen');
+  const modal_container = document.getElementById('modal_container');
+  const close = document.getElementById('btnClose');
+
+  open.addEventListener('click', () => {
+    modal_container.classList.add('show');
+  });
+
+  close.addEventListener('click', () => {
+    modal_container.classList.remove('show');
+  });
+}
