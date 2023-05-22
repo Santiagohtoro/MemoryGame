@@ -10,42 +10,42 @@ window.addEventListener("load", function () {
       id: "1",
       verb: ["be", "was/were", "been"],
     },
-    // {
-    //   id: "2",
-    //   verb: ["buy", "bought", "bought"],
-    // },
-    // {
-    //   id: "3",
-    //   verb: ["begin", "began", "begun"],
-    // },
-    // {
-    //   id: "4",
-    //   verb: ["drive", "drove", "driven"],
-    // },
-    // {
-    //   id: "5",
-    //   verb: ["drink", "drank", "drunk"],
-    // },
-    // {
-    //   id: "6",
-    //   verb: ["feel", "felt", "felt"],
-    // },
-    // {
-    //   id: "7",
-    //   verb: ["draw", "drew", "drawn"],
-    // },
-    // {
-    //   id: "8",
-    //   verb: ["dig", "dug", "dug"],
-    // },
-    // {
-    //   id: "9",
-    //   verb: ["eat", "ate", "eaten"],
-    // },
-    // {
-    //   id: "10",
-    //   verb: ["choose", "chosen", "chosen"],
-    // },
+    {
+      id: "2",
+      verb: ["buy", "bought", "bought"],
+    },
+    {
+      id: "3",
+      verb: ["begin", "began", "begun"],
+    },
+    {
+      id: "4",
+      verb: ["drive", "drove", "driven"],
+    },
+    {
+      id: "5",
+      verb: ["drink", "drank", "drunk"],
+    },
+    {
+      id: "6",
+      verb: ["feel", "felt", "felt"],
+    },
+    {
+      id: "7",
+      verb: ["draw", "drew", "drawn"],
+    },
+    {
+      id: "8",
+      verb: ["dig", "dug", "dug"],
+    },
+    {
+      id: "9",
+      verb: ["eat", "ate", "eaten"],
+    },
+    {
+      id: "10",
+      verb: ["choose", "chosen", "chosen"],
+    },
   ];
 
   //FireBase
@@ -70,7 +70,9 @@ window.addEventListener("load", function () {
 
   const userData = firebase.database().ref('users/' + sessionStorage.getItem('user_uid'));
   const userName = firebase.database().ref('users/' + sessionStorage.getItem('user_uid') + '/nombre');
+  const studentData = firebase.database().ref('users/' + sessionStorage.getItem('user_uid') + '/students/');
   let user_uid = this.sessionStorage.getItem('user_uid');
+
   userData.update(nuevosDatos)
 
   userData.on("value", function (snapshot) {
@@ -84,6 +86,11 @@ window.addEventListener("load", function () {
 
     document.getElementById('tagUser').innerText = "Usuario: " + snapshot.val();
   });
+
+  studentData.on("value", function (snapshot) {
+    const dataInfo = snapshot.val()
+    sessionStorage.setItem("students", JSON.stringify(dataInfo))
+});
 
   //Cartas funcionalidades
   cardsMapping();
@@ -296,6 +303,13 @@ window.addEventListener("load", function () {
     })
   }
 
+  rankingDirection()
+  function rankingDirection() {
+    const btnRanking = document.querySelector('.btnRanking');
+    btnRanking.addEventListener('click', ()  => {
+      location.replace("./ranking.html")
+    })
+  }
 });
 
 function abrirPopUp() {
