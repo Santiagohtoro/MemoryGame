@@ -12,9 +12,8 @@
 </head>
 
 <body>
-  
 
-  
+    
   
   <table>
     <td>
@@ -24,19 +23,45 @@
       <button class="reset" type="submit">Resetear Juego</button>
     </td>
   </table>
+  
   <input type="text" id="nombre-jugador-1" placeholder="Jugador 1" class="input">
   <input type="text" id="nombre-jugador-2" placeholder="Jugador 2" class="input">
   <input type="text" id="nombre-jugador-3" placeholder="Jugador 3" class="input">
   
+  
   <div id="puntajes">
-    <!-- Aquí se mostrarán los puntajes de los jugadores -->
-    
+        
   </div>
   <h1>Juego concentrese</h1>
   
-  <div class="card-grid">
+  
+  
  
+    <div class="container">
+      <div class="cards-container">
+        <div class="card-grid">
+      </div>
+      <table id="verbs-table">
+        <!-- Aquí van las filas de verbos -->
+      </table>
+    </div>
+    
   </div>
+  
+
+  <table>
+    <thead>
+      <tr>
+        <th>Present</th>
+        <th>Past</th>
+        <th>Past Participle</th>
+      </tr>
+    </thead>
+    <tbody id="verbs-table">
+      <!-- cambio 2-->
+    </tbody>
+  </table>
+  
   
 </body>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

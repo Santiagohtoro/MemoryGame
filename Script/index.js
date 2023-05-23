@@ -190,6 +190,25 @@
     }
 
     function cardsMapping() {
+      //cambio 1
+
+function createVerbRow(verb) {
+  return `
+    <tr>
+      <td>${verb.verb[0]}</td>
+      <td>${verb.verb[1]}</td>
+      <td>${verb.verb[2]}</td>
+    </tr>
+  `;
+}
+
+const verbsTable = document.getElementById("verbs-table");
+
+verbs.forEach((element) => {
+  const verbRow = createVerbRow(element);
+  verbsTable.innerHTML += verbRow;
+});
+
       verbs.forEach((element) => {
         
         cardContainer.innerHTML += `
