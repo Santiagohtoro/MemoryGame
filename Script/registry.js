@@ -102,7 +102,6 @@ window.addEventListener("load", function () {
           var user_data = {
               email: correo.value,
               nombre: nombre.value,
-              score:0,
               last_login: date.toLocaleString(),
               status: "logged"
           };
