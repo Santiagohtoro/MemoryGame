@@ -307,7 +307,7 @@ window.addEventListener("load", function () {
   function rankingDirection() {
     const btnRanking = document.querySelector('.btnRanking');
     btnRanking.addEventListener('click', ()  => {
-      location.replace("./ranking.html")
+      location.replace("./top.html")
     })
   }
 });

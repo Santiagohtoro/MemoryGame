@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+.containerUser {
+  float: right;
+  border-radius: 10px;
+  box-shadow: inset;
+  font-size: 20px;
+  text-align: center;
+  vertical-align: middle;
+  padding: 0.5rem 1rem;
+  line-height: 1.5;
+  color: #fff;
+  background-color: #1295a3;
+  font-family: monospace;
+  position: relative;
+  z-index: 1;
+}
+
+#logout:hover {
+  opacity: 0.7;
+}
+
+.bodyContainer {
+  font-family: 'Poppins', sans-serif;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  height: 95vh;
+  width: 95vw;
+  top: 2%;
+  left: 2%;
+  transition: opacity 0.3s ease;
+}
+
+.modal-container {
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.3);
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  height: 95vh;
+  width: 95vw;
+  transition: opacity 0.3s ease;
+}
+
+.modal {
+  background-color: #fff;
+  width: 600px;
+  max-width: 100%;
+  padding: 30px 50px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.modal h1 {
+  margin: 0;
+}
+
+.modal p {
+  opacity: 0.7;
+}
+
+.modalTable {
+  position: relative;
+  left: 3%;
+  background-color: rgba(150, 212, 212, 0.4);
+}
+
+th,
+td {
+  padding: 20px;
+}

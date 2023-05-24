@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://kit.fontawesome.com/03ce1c2806.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="../Styles/top.css">
+  <script src="../Script/top.js"></script>
+  <title>Top 10 en puntaje</title>
+</head>
+
+<body>
+  <div class="containerUser logout">
+    <i class="fa-solid fa-door-open" style="color: #ffffff;"></i>
+    <label id="logout">Cerrar Sesión</label>
+  </div>
+  <div class="containerUser">
+    <i class="fa-regular fa-user fa-bounce" style="color: #ffffff;"></i>
+    <label id="tagUser"></label>
+  </div>
+  <div class="bodyContainer">
+    <div class="modal-container">
+      <div class="modal">
+        <h1>TOP PUNTAJES</h1>
+        <table class="modalTable">
+          <tr>
+            <th>Posicion</th>
+            <th>Jugador</th>
+            <th>Puntaje</th>
+            <th>Ganadas</th>
+          </tr>
+          <tr id="topList"></tr>
+            <td id="listPosition"></td>
+            <td id="listPlayer"></td>
+            <td id="listScore"></td>
+            <td id="listWins"></td>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+
+</html>
