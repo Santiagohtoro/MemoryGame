@@ -1,4 +1,3 @@
-window.addEventListener('DOMContentLoaded', (event) => {
   window.addEventListener("load", function () {
     if (sessionStorage.getItem("user_uid") == null) {
       location.replace("./login.html");
@@ -37,7 +36,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
     students = JSON.parse(sessionStorage.getItem('students'));
     let userName = data.nombre;
     var studentsData = Object.values(students);
-    console.log(studentsData);
 
     document.getElementById('tagUser').innerHTML = userName;
 
@@ -47,23 +45,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
       wins = document.getElementById('listWins');
 
     ranking()
-
     function ranking() {
       studentsData.sort(function (a, b) {
-        console.log(b.score - a.score)
+        return b.win - a.win;
       });
 
-
-
       for (var i = 0; i < studentsData.length; i++) {
-
-        
-        console.log((i + 1) + ". " + studentsData[i].studentName + " - Puntuación: " + studentsData[i].score);
         var item = studentsData[i];
-        var listPosition = document.createElement('td'),
-          listUser = document.createElement('td'),
-          listScore = document.createElement('td'),
-          listWins = document.createElement('td');
+        var listPosition = document.createElement('tr'),
+          listUser = document.createElement('tr'),
+          listScore = document.createElement('tr'),
+          listWins = document.createElement('tr');
 
         //Variales que las contiene
         listPosition.textContent = [(i + 1)];
@@ -81,7 +73,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     cerrarSession()
     function cerrarSession() {
-      const btnSalir = document.querySelector("#logout")
+      const btnSalir = document.querySelector("#logout");
       btnSalir.addEventListener("click", function () {
         var salir = {
           status: "out"
@@ -91,5 +83,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
         location.replace("./login.html")
       })
     }
+
+    backGame()
+    function backGame() {
+      const btnBack = document.getElementById('backGame');
+      btnBack.addEventListener("click", () => {
+        location.replace("./index.html");
+      })
+    }
   })
-});

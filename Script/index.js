@@ -78,14 +78,11 @@ window.addEventListener("load", function () {
     .ref('users/' + sessionStorage.getItem('user_uid') + '/students/');
   userData.update(nuevosDatos);
   userData.on("value", function (snapshot) {
-    console.log(snapshot.val());
     const dataInfo = snapshot.val();
     sessionStorage.setItem("user", JSON.stringify(dataInfo));
   });
 
   userName.on("value", function (snapshot) {
-    console.log(snapshot.val());
-
     document.getElementById("tagUser").innerText = "Usuario: " + snapshot.val();
   });
 
@@ -236,29 +233,63 @@ window.addEventListener("load", function () {
       // Buscar al jugador con mayor puntaje
       let maxPuntaje = 0;
       let ganador = null;
+      let win = 0;
       for (let i = 0; i < jugadores.length; i++) {
         if (jugadores[i].puntaje > maxPuntaje) {
           maxPuntaje = jugadores[i].puntaje;
           ganador = jugadores[i];
+          //Nuevo Array
+          let ganadorName = ganador.nombre;
+          let ganadorScore = ganador.puntaje;
+          win = 1;
+
+          const winnerArray = [{
+            studentName: ganadorName,
+            score: ganadorScore,
+            win: win,
+          }];
+
           //Firebase student
-          let database_ref = database.ref();
-          let winnerName = ganador.nombre;
-          let points = ganador.puntaje;
-          const usersRef = database_ref.child('users/' + user_uid + '/students/');
-          usersRef.child(winnerName).set({
-            studentName: winnerName,
-            score: points,
-            win: 1,
+          const databaseRef = firebase.database().ref('users/' + sessionStorage.getItem('user_uid') + '/students/');
+
+          function updateDatabaseData() {
+            // Obtener los datos de la base de datos en tiempo real
+            databaseRef.once('value', snapshot => {
+              const databaseData = snapshot.val();
+
+              // Verificar y actualizar los datos si el studentName coincide en ambos JSON
+              for (let i = 0; i < winnerArray.length; i++) {
+                const localEntry = winnerArray[i];
+                const { studentName, score, win } = localEntry;
+
+                if (databaseData && databaseData[studentName]) {
+                  // Sumar los valores del JSON local y el JSON de la base de datos
+                  const updatedScore = score + databaseData[studentName].score;
+                  const updatedWin = win + databaseData[studentName].win;
+
+                  // Actualizar los valores en el JSON de la base de datos
+                  databaseRef.child(`/${studentName}`).update({ score: updatedScore, win: updatedWin });
+                  console.log("Registro enviado");
+                } else{
+                  databaseRef.child(`/${studentName}`).set({
+                      studentName: studentName,
+                      score: score,
+                      win: 1,
+                    });
+                }
+              }
+            });
+          }
+          updateDatabaseData();
+          //Estudiante Ganador
+          Swal.fire({
+            title: `¡${ganador.nombre} ha ganado con ${ganador.puntaje} puntos!`,
+            icon: "success",
+            confirmButtonText: "Aceptar",
+          }).then(() => {
+            // Detener el juego
           });
         }
-        //Estudiante Ganador
-        Swal.fire({
-          title: `¡${ganador.nombre} ha ganado con ${ganador.puntaje} puntos!`,
-          icon: "success",
-          confirmButtonText: "Aceptar",
-        }).then(() => {
-          // Detener el juego
-        });
       }
     }
   }
