@@ -73,6 +73,9 @@ window.addEventListener("load", function () {
   const userName = firebase
     .database()
     .ref("users/" + sessionStorage.getItem("user_uid") + "/nombre");
+  const studentData = firebase
+    .database()
+    .ref('users/' + sessionStorage.getItem('user_uid') + '/students/');
   userData.update(nuevosDatos);
   userData.on("value", function (snapshot) {
     console.log(snapshot.val());
@@ -89,7 +92,7 @@ window.addEventListener("load", function () {
   studentData.on("value", function (snapshot) {
     const dataInfo = snapshot.val()
     sessionStorage.setItem("students", JSON.stringify(dataInfo))
-});
+  });
 
   //Cartas funcionalidades
   cardsMapping();
@@ -97,14 +100,14 @@ window.addEventListener("load", function () {
   start.addEventListener("click", function () {
     const audio = new Audio("/static/music/tema-principal.mp3");
     audio.volume = 0.2;
-    audio.addEventListener("ended", function() {
+    audio.addEventListener("ended", function () {
       // Reinicia la reproducción del audio al finalizar
       audio.currentTime = 0;
       audio.play();
     });
-    
+
     audio.play();
-    
+
     jugadores[0].nombre = document.getElementById("nombre-jugador-1").value;
     jugadores[1].nombre = document.getElementById("nombre-jugador-2").value;
     jugadores[2].nombre = document.getElementById("nombre-jugador-3").value;
@@ -137,7 +140,7 @@ window.addEventListener("load", function () {
         console.log();
 
         if (isSameValue) {
-          flippedCards.forEach((card) =>{
+          flippedCards.forEach((card) => {
             card.removeEventListener("click", flipCard)
             const audioScore = new Audio("/static/music/super-mario-score.mp3");
             audioScore.volume = 0.5;
@@ -147,15 +150,12 @@ window.addEventListener("load", function () {
           //primer cambio
           jugadores[currentPlayer].puntaje++;
           document.getElementById("puntajes").innerHTML = `
-             <p${currentPlayer === 0 ? ' class="current-player"' : ""}>${
-            jugadores[0].nombre
-          }: ${jugadores[0].puntaje}</p>
-             <p${currentPlayer === 1 ? ' class="current-player"' : ""}>${
-            jugadores[1].nombre
-          }: ${jugadores[1].puntaje}</p>
-             <p${currentPlayer === 2 ? ' class="current-player"' : ""}>${
-            jugadores[2].nombre
-          }: ${jugadores[2].puntaje}</p>
+             <p${currentPlayer === 0 ? ' class="current-player"' : ""}>${jugadores[0].nombre
+            }: ${jugadores[0].puntaje}</p>
+             <p${currentPlayer === 1 ? ' class="current-player"' : ""}>${jugadores[1].nombre
+            }: ${jugadores[1].puntaje}</p>
+             <p${currentPlayer === 2 ? ' class="current-player"' : ""}>${jugadores[2].nombre
+            }: ${jugadores[2].puntaje}</p>
                `;
           flippedCards = [];
           ganador();
@@ -166,15 +166,12 @@ window.addEventListener("load", function () {
             //segundo cambio
             currentPlayer = (currentPlayer + 1) % 3;
             document.getElementById("puntajes").innerHTML = `
-             <p${currentPlayer === 0 ? ' class="current-player"' : ""}>${
-              jugadores[0].nombre
-            }: ${jugadores[0].puntaje}</p>
-             <p${currentPlayer === 1 ? ' class="current-player"' : ""}>${
-              jugadores[1].nombre
-            }: ${jugadores[1].puntaje}</p>
-             <p${currentPlayer === 2 ? ' class="current-player"' : ""}>${
-              jugadores[2].nombre
-            }: ${jugadores[2].puntaje}</p>
+             <p${currentPlayer === 0 ? ' class="current-player"' : ""}>${jugadores[0].nombre
+              }: ${jugadores[0].puntaje}</p>
+             <p${currentPlayer === 1 ? ' class="current-player"' : ""}>${jugadores[1].nombre
+              }: ${jugadores[1].puntaje}</p>
+             <p${currentPlayer === 2 ? ' class="current-player"' : ""}>${jugadores[2].nombre
+              }: ${jugadores[2].puntaje}</p>
            `;
           }, 1000);
         }
@@ -312,7 +309,19 @@ window.addEventListener("load", function () {
       location.replace("./login.html");
     });
   }
+
+  rankingDirection();
+
+  function rankingDirection() {
+    const btnRanking = document.querySelector('.btnRanking');
+    btnRanking.addEventListener('click', () => {
+      location.replace("./top.html");
+    })
+  }
+
 });
+
+
 
 function abrirPopUp() {
   const open = document.getElementById("btnOpen");

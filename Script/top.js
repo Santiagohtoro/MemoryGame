@@ -53,6 +53,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
         console.log(b.score - a.score)
       });
 
+
+
       for (var i = 0; i < studentsData.length; i++) {
 
         
