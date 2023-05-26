@@ -45,7 +45,7 @@
 }
 
 .containerText::before{
-    content: url(/static/Images/NFTBrand70.png);
+    content: url(../static/Images/NFTBrand70.png);
     width: 30px;
     height: 30px;
     top: 15px;
