@@ -95,7 +95,7 @@ window.addEventListener("load", function () {
   cardsMapping();
   shuffleCards();
   start.addEventListener("click", function () {
-    const audio = new Audio("/static/music/tema-principal.mp3");
+    const audio = new Audio("./static/music/tema-principal.mp3");
     audio.volume = 0.2;
     audio.addEventListener("ended", function () {
       // Reinicia la reproducción del audio al finalizar
@@ -139,7 +139,7 @@ window.addEventListener("load", function () {
         if (isSameValue) {
           flippedCards.forEach((card) => {
             card.removeEventListener("click", flipCard)
-            const audioScore = new Audio("/static/music/super-mario-score.mp3");
+            const audioScore = new Audio("./static/music/super-mario-score.mp3");
             audioScore.volume = 0.5;
             audioScore.play();
           }
@@ -321,7 +321,7 @@ window.addEventListener("load", function () {
 
   reset.addEventListener("click", reiniciarPartida);
   function reiniciarPartida() {
-    const audioGameover = new Audio("/static/music/game-over-song.mp3");
+    const audioGameover = new Audio("./static/music/game-over-song.mp3");
     audioGameover.play();
     setTimeout(() => {
       window.location.href = "index.html"; // redirige a la página principal
