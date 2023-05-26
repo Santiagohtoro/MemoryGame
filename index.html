@@ -8,6 +8,7 @@
   <script src="https://kit.fontawesome.com/03ce1c2806.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="./Styles/style.css">
   <script src="./Script/index.js"></script>
+  <link rel="shortcut icon" href="/static/Images/NFTBrand20.ico" />
   <title>Verbos Irregulares</title>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -21,15 +22,13 @@
     <i class="fa-regular fa-user fa-bounce" style="color: #ffffff;"></i>
     <label id="tagUser"></label>
   </div>
-  <table>
-    <td>
-      <button class="btnStart">Iniciar Juego</button>
-    </td>
-    <td>
-      <button class="btnReset" type="submit">Resetear Juego</button>
-    </td>
-    <td>
-      <button id="btnOpen" onclick="abrirPopUp()">
+  <div class="buttonsGroup">
+  
+      <button class="btnStart buttonGlobal">Iniciar Juego</button>
+    
+      <button class="btnReset buttonGlobal" type="submit">Resetear Juego</button>
+    
+      <button id="btnOpen"class="buttonGlobal" onclick="abrirPopUp()">
         Instrucciones
       </button>
       <div id="modal_container" class="modal-container">
@@ -46,15 +45,16 @@
           </p>
           <button id="btnClose">Cerrar</button>
         </div>
-      </div>
-    </td>
-    <td>
-      <button class="btnRanking">Ranking</button>
-    </td>
-  </table>
-  <input type="text" id="nombre-jugador-1" placeholder="Jugador 1" class="input" minlength="5">
+      </div >
+    
+      <button class="btnRanking buttonGlobal">Ranking</button>
+   
+    </div>
+  <div class="agrupador">
+  <input type="text" id="nombre-jugador-1" placeholder="Jugador 1" class="input userInput" minlength="5">
   <input type="text" id="nombre-jugador-2" placeholder="Jugador 2" class="input" minlength="5">
   <input type="text" id="nombre-jugador-3" placeholder="Jugador 3" class="input" minlength="5">
+</div>
   <div id="puntajes">
     <!-- Aquí se mostrarán los puntajes de los jugadores -->
   </div>

@@ -83,7 +83,7 @@ window.addEventListener("load", function () {
   });
 
   userName.on("value", function (snapshot) {
-    document.getElementById("tagUser").innerText = "Usuario: " + snapshot.val();
+    document.getElementById("tagUser").innerText =  snapshot.val();
   });
 
   studentData.on("value", function (snapshot) {

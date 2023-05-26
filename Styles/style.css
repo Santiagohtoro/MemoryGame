@@ -63,7 +63,13 @@
     transform: rotateY(180deg);
 }
 
+.agrupador{
+    display: flex;
+    justify-content: center;
+}
+
 input {
+    width: 30%;
     border: none;
     border-radius: 5px;
     padding: 10px;
@@ -71,14 +77,19 @@ input {
     margin: 5px;
     box-shadow: 0px 0px 5px grey;
 }
+.buttonsGroup{
+    display:inline-block;
 
+    margin-bottom: 10px;
+}
 .btnStart,
 .btnReset,
 #btnOpen,
 #btnClose,
 .btnRanking {
-    display: block;
+    width: 150px;
     margin-top: 10px;
+    
     padding: 10px;
     border: none;
     border-radius: 5px;
@@ -96,8 +107,13 @@ input {
 .btnRanking:hover {
     opacity: 0.7;
 }
-
-#logout:hover {
+.containerLog{
+    display: block;
+}
+.logout{
+    margin-left: 10px;
+}
+.logout:hover {
     opacity: 0.7;
 }
 
@@ -189,4 +205,42 @@ h1 {
 .modal p {
     opacity: 0.7;
     font-size: 14px;
+}
+
+
+
+
+
+@media (max-width: 640px) {
+    .agrupador{
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+    .buttonsGroup{
+        display:inline-flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        margin-left: 1vw;
+        margin-bottom: 10px;
+    }
+    .input{
+        width: 85vw;
+    }
+
+    .logout{
+        margin-bottom: 10px;
+    }
+    
+}
+
+@media (max-width: 900px) {
+    .agrupador{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .input{
+        min-width: 30vw;
+    }
 }
