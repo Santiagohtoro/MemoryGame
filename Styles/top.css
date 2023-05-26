@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
 
-* {
-  box-sizing: border-box;
-}
-
 .containerUser {
   float: right;
   border-radius: 10px;
@@ -25,7 +21,7 @@
 }
 
 #backGame {
-  display: block;
+  display: flex;
   margin-top: 10px;
   padding: 10px;
   border: none;
@@ -71,7 +67,6 @@
 
 .modal {
   background-color: #fff;
-  width: 600px;
   max-width: 100%;
   padding: 30px 50px;
   border-radius: 5px;
@@ -88,9 +83,9 @@
 }
 
 .modalTable {
-  position: relative;
-  left: 3%;
+  display: flex;
   background-color: rgba(150, 212, 212, 0.4);
+  
 }
 
 th,
