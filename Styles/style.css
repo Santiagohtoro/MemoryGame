@@ -207,7 +207,42 @@ h1 {
     font-size: 14px;
 }
 
-
+.container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+  }
+  
+  .cards-container {
+    margin-right: 20px;
+  }
+  
+  #verbs-table {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #F2A649;
+    border: 1px solid #dddddd;
+    margin-bottom: 20px;
+  }
+  
+  #verbs-table th,
+  #verbs-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #dddddd;
+  }
+  
+  #verbs-table th {
+    background-color: #f2f2f2;
+  }
+  
+  #verbs-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  #verbs-table tbody tr:hover {
+    background-color: #e6e6e6;
+  }
 
 
 

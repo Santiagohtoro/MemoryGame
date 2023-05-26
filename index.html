@@ -23,45 +23,65 @@
     <label id="tagUser"></label>
   </div>
   <div class="buttonsGroup">
-  
-      <button class="btnStart buttonGlobal">Iniciar Juego</button>
-    
-      <button class="btnReset buttonGlobal" type="submit">Resetear Juego</button>
-    
-      <button id="btnOpen"class="buttonGlobal" onclick="abrirPopUp()">
-        Instrucciones
-      </button>
-      <div id="modal_container" class="modal-container">
-        <div class="modal">
-          <h1>Instrucciones de juego</h1>
-          <p>
-            Se daran 3 verbos en los tiempos presente, pasado y futuro.
-          </p>
-          <p>
-            El jugador debe encontrar en todas las tarjetas el verbo en los tiempos mencionados. 
-          </p>
-          <p>
-            Gana el jugador que mas verbos haya encontrado en las tarjetas
-          </p>
-          <button id="btnClose">Cerrar</button>
-        </div>
-      </div >
-    
-      <button class="btnRanking buttonGlobal">Ranking</button>
-   
+
+    <button class="btnStart buttonGlobal">Iniciar Juego</button>
+
+    <button class="btnReset buttonGlobal" type="submit">Resetear Juego</button>
+
+    <button id="btnOpen" class="buttonGlobal" onclick="abrirPopUp()">
+      Instrucciones
+    </button>
+    <div id="modal_container" class="modal-container">
+      <div class="modal">
+        <h1>Instrucciones de juego</h1>
+        <p>
+          Se daran 3 verbos en los tiempos presente, pasado y futuro.
+        </p>
+        <p>
+          El jugador debe encontrar en todas las tarjetas el verbo en los tiempos mencionados.
+        </p>
+        <p>
+          Gana el jugador que mas verbos haya encontrado en las tarjetas
+        </p>
+        <button id="btnClose">Cerrar</button>
+      </div>
     </div>
+
+    <button class="btnRanking buttonGlobal">Ranking</button>
+
+  </div>
   <div class="agrupador">
-  <input type="text" id="nombre-jugador-1" placeholder="Jugador 1" class="input userInput" minlength="5">
-  <input type="text" id="nombre-jugador-2" placeholder="Jugador 2" class="input" minlength="5">
-  <input type="text" id="nombre-jugador-3" placeholder="Jugador 3" class="input" minlength="5">
-</div>
+    <input type="text" id="nombre-jugador-1" placeholder="Jugador 1" class="input userInput" minlength="5">
+    <input type="text" id="nombre-jugador-2" placeholder="Jugador 2" class="input" minlength="5">
+    <input type="text" id="nombre-jugador-3" placeholder="Jugador 3" class="input" minlength="5">
+  </div>
   <div id="puntajes">
     <!-- Aquí se mostrarán los puntajes de los jugadores -->
   </div>
   <h1>Juego concentrese</h1>
-  <div class="card-grid">
+  <div class="container">
+    <div class="cards-container">
+      <div class="card-grid">
+
+      </div>
+      <table id="verbs-table">
+        <!-- Aquí van las filas de verbos -->
+      </table>
+    </div>
 
   </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Present</th>
+        <th>Past</th>
+        <th>Past Participle</th>
+      </tr>
+    </thead>
+    <tbody id="verbs-table">
+      <!-- cambio 2-->
+    </tbody>
+  </table>
 </body>
 <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
