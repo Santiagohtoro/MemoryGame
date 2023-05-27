@@ -119,16 +119,22 @@ window.addEventListener("load", function () {
     );
      
     function registroCorrecto() {
-      setTimeout(() => {
+    
         Swal.fire({
           position: 'center',
           icon: 'success',
-          title: 'Your work has been saved',
-          showConfirmButton: false,
-          timer: 1500
+          title: 'El usuario se ha registrado correctamente',
+          showConfirmButton: true
+        }).then((result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
+            location.replace('/login.html')
+          }
         })
+      
         
-      }, 1000);
+   
+      
       
     }
   }
