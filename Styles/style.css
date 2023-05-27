@@ -216,17 +216,23 @@ h1 {
   .cards-container {
     margin-right: 20px;
   }
+  table{
+    height: 200px;
+  }
   
   #verbs-table {
     border-collapse: collapse;
     width: 100%;
-    background-color: #F2A649;
+    background-color: #037E8C;
     border: 1px solid #dddddd;
     margin-bottom: 20px;
   }
-  
+
   #verbs-table th,
   #verbs-table td {
+    height: 20px;
+    font-weight: bolder;
+    color: #ffffff;
     padding: 8px;
     text-align: left;
     border-bottom: 1px solid #dddddd;
@@ -242,6 +248,11 @@ h1 {
   
   #verbs-table tbody tr:hover {
     background-color: #e6e6e6;
+  }
+  .agrupadorTarjetasVerbos{
+    display: grid;
+    grid-template-columns: 79vw 20vw  ;
+
   }
 
 
@@ -267,6 +278,9 @@ h1 {
     .logout{
         margin-bottom: 10px;
     }
+    .agrupadorTarjetasVerbos{
+        display: inline-block;
+    }
     
 }
 
@@ -277,5 +291,8 @@ h1 {
     }
     .input{
         min-width: 30vw;
+    }
+    .agrupadorTarjetasVerbos{
+        display: inline-block;
     }
 }

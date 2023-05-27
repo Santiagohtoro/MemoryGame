@@ -5,6 +5,9 @@ window.addEventListener("load", function () {
   const start = document.querySelector(".btnStart");
   const reset = document.querySelector(".btnReset");
   const cardContainer = document.querySelector(".card-grid");
+  var tabla = document.getElementById("verbs-table");
+  var celdas = tabla.getElementsByTagName("td")
+
   const verbs = [
     {
       id: "1",
@@ -124,20 +127,26 @@ window.addEventListener("load", function () {
     cards.forEach((card) => card.addEventListener("click", flipCard));
 
     function flipCard(e) {
+      let verbFlipped =[]
+      
       if (flippedCards.length < 3) {
         this.classList.add("flipped");
         flippedCards.push(this);
       }
-
+      console.log(flippedCards);
       if (flippedCards.length === 3) {
         const isSameValue =
           flippedCards[0].dataset.value === flippedCards[1].dataset.value &&
           flippedCards[1].dataset.value === flippedCards[2].dataset.value &&
           flippedCards[0].dataset.verb !== flippedCards[1].dataset.verb;
         console.log();
-
+       
         if (isSameValue) {
+          //continua 
+          tacharceldas(flippedCards[0].dataset.value)
+      
           flippedCards.forEach((card) => {
+            
             card.removeEventListener("click", flipCard)
             const audioScore = new Audio("./static/music/super-mario-score.mp3");
             audioScore.volume = 0.5;
@@ -349,22 +358,34 @@ window.addEventListener("load", function () {
       location.replace("./top.html");
     })
   }
-  function createVerbRow(verb) {
-    return `
-      <tr>
-        <td>${verb.verb[0]}</td>
-        <td>${verb.verb[1]}</td>
-        <td>${verb.verb[2]}</td>
-      </tr>
-    `;
+  createVerbRow()
+  //lista de verbos
+  function createVerbRow() {
+    const verbsTable = document.getElementById("verbs-table");
+    
+    verbs.forEach((element) => {
+
+        verbsTable.innerHTML += `
+        <tr>
+          <td data-id="${element.id}">${element.verb[0]}</td>
+          <td data-id="${element.id}">${element.verb[1]}</td>
+          <td data-id="${element.id}">${element.verb[2]}</td>
+        </tr>
+      `;
+      })
+  };
+  
+  function tacharceldas(palabraBuscada) {
+    for (var i = 0; i < celdas.length; i++) {
+      var dataId = celdas[i].getAttribute("data-id");
+      console.log(dataId);
+      if (dataId === palabraBuscada) {
+        // Tachar la palabra
+        celdas[i].innerHTML = "<s>" + celdas[i].innerHTML + "</s>";
+      }
+    }
   }
   
-  const verbsTable = document.getElementById("verbs-table");
-  
-  verbs.forEach((element) => {
-    const verbRow = createVerbRow(element);
-    verbsTable.innerHTML += verbRow;
-  });
 
 });
 
